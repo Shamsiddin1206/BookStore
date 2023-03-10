@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BookStore</string>
+    <string name="choose_language">Выберите язык</string>
+    <string name="enter_the_password">Введите пароль</string>
+    <string name="verify">Проверить</string>
+    <string name="sign_in">Войти</string>
+    <string name="name">Имя</string>
+    <string name="email">Электронная почта</string>
+    <string name="password">Пароль</string>
+    <string name="enter">Войти</string>
+    <string name="you_have_already_registered">Вы уже зарегистрировались?</string>
+    <string name="sign_up">Зарегистрироваться</string>
+    <string name="new_one">Новый?</string>
+    <string name="menu">Меню</string>
+    <string name="tohirov_shamsiddin">Тохиров Шамсиддин</string>
+    <string name="notifications">Уведомления</string>
+    <string name="settings">Настройки</string>
+    <string name="my_books">Мои книги</string>
+    <string name="help">Помощь?</string>
+    <string name="log_out">Выйти</string>
+    <string name="book_library">Библиотека</string>
+    <string name="fantasy">Фантастика</string>
+    <string name="religion">Религиозные</string>
+    <string name="literature">Литература</string>
+    <string name="business_literature">Деловая литература</string>
+    <string name="biography">Биография</string>
+    <string name="novel">Роман</string>
+    <string name="science">Научные</string>
+    <string name="news">Новости</string>
+    <string name="check_your_internet_connection">Проверьте подключение к Интернету</string>
+    <string name="profile">Профиль</string>
+    <string name="rename">Переименовать</string>
+    <string name="write_name">Напишите имя</string>
+    <string name="saved_books">Сохраненные книги</string>
+    <string name="your_saved_books_will_be_here">Ваши сохраненные книги будут здесь</string>
+    <string name="set_up_password">Установить пароль</string>
+    <string name="save">Сохранять</string>
+    <string name="next">Следующий</string>
+    <string name="notes">У вас пока нету новых собщений</string>
+    <string name="contactme">Свяжитесь со мной - takhirovshamsiddin@gmail.com</string>
+    <string name="change_language">Изменить язык</string>
+</resources>

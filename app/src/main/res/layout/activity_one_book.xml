@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OneBookActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageButton
+            android:id="@+id/orqaga"
+            android:elevation="10dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/back"
+            android:background="@color/white"
+            android:layout_gravity=""
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="20dp"
+            android:scaleType="centerInside"/>
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/mainrasm"
+            android:layout_width="200dp"
+            android:layout_height="250dp"
+            android:scaleType="centerInside"
+            android:layout_marginTop="-60dp"
+            android:src="@drawable/odoblar_xazinasi" />
+        <TextView
+            android:layout_gravity="center"
+            android:id="@+id/mainname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mainrasm"
+            android:text="Odoblar Xazinasi"
+            android:textSize="25sp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/authorname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mainname"
+            android:textSize="17sp"
+            android:text="MuhammadSodiq MuhammadYusuf"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/authorname"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            app:cardElevation="15dp"
+            android:backgroundTint="#d6aa8a"
+            app:cardCornerRadius="15dp"
+            android:layout_marginBottom="30dp">
+            <TextView
+                android:paddingStart="20dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textStyle="italic"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                android:text="'War and Peace' by Leo Tolstoy is not just a classic novel, but a real heroic epic, the literary value of which is incomparable with any other work. The writer himself considered it a poem, where the private life of a person is inseparable from the history of the whole country. It took Leo Tolstoy seven years to perfect his novel. Back in 1863, the writer more than once discussed plans to create a large-scale literary canvas with his father-in-law A.E. Bersom. In September of the same year, the father of Tolstoy's wife sent a letter from Moscow, where he mentioned the writer's idea. Historians consider this date the official start of work on the epic. A month later, Tolstoy writes to his relative that all his time and attention is occupied by a new novel, over which he thinks like never before."/>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+
+</ScrollView>
