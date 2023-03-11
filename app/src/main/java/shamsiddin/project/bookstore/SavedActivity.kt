@@ -34,6 +34,7 @@ class SavedActivity : AppCompatActivity() {
         val type = object : TypeToken<ArrayList<Book>>(){}.type
         val str = getpreferences.getString("booklist", "")
         val gson = Gson()
+        val edit = getpreferences.edit()
         list = gson.fromJson(str, type)
         if(list.isEmpty()){
             binding.hiddentext.visibility = View.VISIBLE
@@ -44,6 +45,8 @@ class SavedActivity : AppCompatActivity() {
                 override fun onSelect(book: Book) {
                     if (!book.holati){
                         list.remove(book)
+                        val s = gson.toJson(list)
+                        edit.putString("booklist", s).apply()
                         adapter.notifyDataSetChanged()
                         if (list.size==0){
                             binding.hiddentext.visibility = View.VISIBLE

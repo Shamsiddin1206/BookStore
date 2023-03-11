@@ -26,18 +26,20 @@ class SplashActivity : AppCompatActivity() {
         val gson = Gson()
         val gson2 = Gson()
         val getPreferences2 = getSharedPreferences("Til", MODE_PRIVATE)
-        val str2 = getPreferences2.getString("lang", "")
+        val str2 = getPreferences2.getString("lang", "-2")
         val getPreferences = getSharedPreferences("Status", MODE_PRIVATE)
-        val str = getPreferences.getString("status", "")
-        if (str ==""){
+        val str = getPreferences.getString("status", "-1")
 
-        }else{
-            userList = gson.fromJson(str, type)
-        }
-        name = gson2.fromJson(str2, type2)
-        Log.d("LLL", "onCreate: ${name} ")
         binding.splashLogo.alpha = 0f
         binding.splashLogo.animate().setDuration(3000).alpha(1f).withEndAction{
+            if (str =="-1"){
+                val intent = Intent(this, LanguageActivity::class.java)
+                startActivity(intent)
+                return@withEndAction
+            }else{
+                userList = gson.fromJson(str, type)
+            }
+            name = gson2.fromJson(str2, type2)
             var a = 0
             for (i in 0..userList.size-1){
                 if (userList[i]=="true"){

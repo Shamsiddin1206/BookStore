@@ -31,8 +31,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        bookList = arrayListOf()
         allbooks = arrayListOf()
+        val getPreferences = getSharedPreferences("Books", MODE_PRIVATE)
+        val edit = getPreferences.edit()
+        val type = object : TypeToken<ArrayList<Book>>(){}.type
+        val gson = Gson()
+        val str = getPreferences.getString("booklist", "-1")
+        if (str == "-1"){
+            bookList = arrayListOf()
+        }else{
+            bookList = gson.fromJson(str, type)
+        }
+        val s = gson.toJson(bookList)
+        edit.putString("booklist", s).apply()
 
         binding.news.setOnClickListener {
             val intent = Intent(this, NewsActivity::class.java)
@@ -40,11 +51,6 @@ class MainActivity : AppCompatActivity() {
         }
         binding.selected.setOnClickListener {
             val intent = Intent(this, SavedActivity::class.java)
-            val getPreferences = getSharedPreferences("Books", MODE_PRIVATE)
-            val edit = getPreferences.edit()
-            val gson = Gson()
-            val s = gson.toJson(bookList)
-            edit.putString("booklist", s).apply()
             startActivity(intent)
         }
         binding.profile.setOnClickListener {
@@ -68,9 +74,14 @@ class MainActivity : AppCompatActivity() {
         val bookAdapter = BookAdapter(this, fantasyAPI(), object : BookAdapter.OnEditListener {
             override fun onSelect(book: Book) {
                 if (book.holati){
-                    bookList.add(book)
+                    Check(book)
+                    val a = gson.toJson(bookList)
+                    edit.putString("booklist", a).apply()
+                    Log.d("SSS", "onSelect: ${bookList.joinToString()}")
                 }else{
                     bookList.remove(book)
+                    val a = gson.toJson(bookList)
+                    edit.putString("booklist", a).apply()
                 }
             }
         })
@@ -82,9 +93,15 @@ class MainActivity : AppCompatActivity() {
         val religionAdapter = BookAdapter(this, relifionAPI(), object : BookAdapter.OnEditListener {
             override fun onSelect(book: Book) {
                 if (book.holati){
-                    bookList.add(book)
+                    Check(book)
+                    val a = gson.toJson(bookList)
+                    edit.putString("booklist", a).apply()
+                    Log.d("SSS", "onSelect: ${bookList.joinToString()}")
                 }else{
                     bookList.remove(book)
+                    val a = gson.toJson(bookList)
+                    edit.putString("booklist", a).apply()
+                    Log.d("SSS", "onSelect: ${bookList.joinToString()}")
                 }
             }
         })
@@ -92,12 +109,60 @@ class MainActivity : AppCompatActivity() {
         val literatureAdapter = BookAdapter(this, literatureAPI(), object : BookAdapter.OnEditListener {
             override fun onSelect(book: Book) {
                 if (book.holati){
-                    bookList.add(book)
+                    Check(book)
+                    val a = gson.toJson(bookList)
+                    edit.putString("booklist", a).apply()
+                    Log.d("SSS", "onSelect: ${bookList.joinToString()}")
+                }else{
+                    bookList.remove(book)
+                    val a = gson.toJson(bookList)
+                    edit.putString("booklist", a).apply()
+                    Log.d("SSS", "onSelect: ${bookList.joinToString()}")
+                }
+            }
+        })
+
+        val BioAdapter = BookAdapter(this, relifionAPI(), object : BookAdapter.OnEditListener {
+            override fun onSelect(book: Book) {
+                if (book.holati){
+                    Check(book)
                 }else{
                     bookList.remove(book)
                 }
             }
         })
+
+        val NovelAdapter = BookAdapter(this, literatureAPI(), object : BookAdapter.OnEditListener {
+            override fun onSelect(book: Book) {
+                if (book.holati){
+                    Check(book)
+                }else{
+                    bookList.remove(book)
+                }
+            }
+        })
+
+        val ScienceAdapter = BookAdapter(this, fantasyAPI(), object : BookAdapter.OnEditListener {
+            override fun onSelect(book: Book) {
+                if (book.holati){
+                    Check(book)
+                }else{
+                    bookList.remove(book)
+                }
+            }
+        })
+
+
+        val BusinessAdapter = BookAdapter(this, fantasyAPI(), object : BookAdapter.OnEditListener {
+            override fun onSelect(book: Book) {
+                if (book.holati){
+                    Check(book)
+                }else{
+                    bookList.remove(book)
+                }
+            }
+        })
+
 
 
 
@@ -150,6 +215,9 @@ class MainActivity : AppCompatActivity() {
             binding.biogLine.setBackgroundResource(R.drawable.underline2)
             binding.novelLine.setBackgroundResource(R.drawable.underline2)
             binding.scienceLine.setBackgroundResource(R.drawable.underline2)
+            index = 3
+            currentAdapter = BusinessAdapter
+            binding.bookListview.adapter = BusinessAdapter
         }
 
         binding.biography.setOnClickListener {
@@ -160,6 +228,9 @@ class MainActivity : AppCompatActivity() {
             binding.biogLine.setBackgroundResource(R.drawable.underline)
             binding.novelLine.setBackgroundResource(R.drawable.underline2)
             binding.scienceLine.setBackgroundResource(R.drawable.underline2)
+            index = 4
+            currentAdapter = BioAdapter
+            binding.bookListview.adapter = BioAdapter
         }
 
         binding.novel.setOnClickListener {
@@ -170,6 +241,9 @@ class MainActivity : AppCompatActivity() {
             binding.biogLine.setBackgroundResource(R.drawable.underline2)
             binding.novelLine.setBackgroundResource(R.drawable.underline)
             binding.scienceLine.setBackgroundResource(R.drawable.underline2)
+            index = 5
+            currentAdapter = NovelAdapter
+            binding.bookListview.adapter = NovelAdapter
         }
 
         binding.science.setOnClickListener {
@@ -180,6 +254,9 @@ class MainActivity : AppCompatActivity() {
             binding.biogLine.setBackgroundResource(R.drawable.underline2)
             binding.novelLine.setBackgroundResource(R.drawable.underline2)
             binding.scienceLine.setBackgroundResource(R.drawable.underline)
+            index = 6
+            currentAdapter = ScienceAdapter
+            binding.bookListview.adapter = ScienceAdapter
         }
 
         binding.search.addTextChangedListener {
@@ -242,6 +319,8 @@ class MainActivity : AppCompatActivity() {
         fantasylist.add(Book("Star Wars", "Terry Brooks", "", R.drawable.starwars, "4.9", false))
         fantasylist.add(Book("451 Fahrenheit", "Rey Bredberi", "", R.drawable.farenheit, "4.9", false))
         AddBooks(fantasylist)
+        Log.d("DDD", "fantasyAPI: ${fantasylist[0].holati}")
+        CheckYurak(fantasylist)
         return fantasylist
     }
 
@@ -253,6 +332,7 @@ class MainActivity : AppCompatActivity() {
         userlist.add(Book("Tafsiri Hilol", "Shayh Muhammad Sodiq","Muhammad Yusuf", R.drawable.tafsiri_hilol, "5.0", false))
         userlist.add(Book("Ruhiy tarbiya", "Shayh Muhammad Sodiq","Muhammad Yusuf", R.drawable.ruhiy_tarbiya, "5.0", false))
         AddBooks(userlist)
+        CheckYurak(userlist)
         return userlist
     }
 
@@ -264,6 +344,7 @@ class MainActivity : AppCompatActivity() {
         userlist.add(Book("Player", "F. Dostoevsky", "", R.drawable.igrok, "4.7", false))
         userlist.add(Book("451 Fahrenheit", "Ray Bradbury", "", R.drawable.farenheit, "4.6", false))
         AddBooks(userlist)
+        CheckYurak(userlist)
         return userlist
     }
 
@@ -280,6 +361,29 @@ class MainActivity : AppCompatActivity() {
         if (index==2){
             return literatureAPI()
         }
+        if (index==3){
+            return fantasyAPI()
+        }
+        if (index==4){
+            return relifionAPI()
+        }
+        if (index==5){
+            return literatureAPI()
+        }
         return fantasyAPI()
+    }
+
+    private fun Check(book: Book){
+        if (book !in bookList){
+            bookList.add(book)
+        }
+    }
+
+    private fun CheckYurak(arrayList: ArrayList<Book>){
+        for (i in 0..arrayList.size-1){
+            if (arrayList[i] in bookList){
+                arrayList[i].holati = true
+            }
+        }
     }
 }
